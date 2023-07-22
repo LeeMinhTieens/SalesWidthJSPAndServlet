@@ -1,5 +1,7 @@
 package com.leminhtien.mapper;
 
-public interface RowMapper <T>{
+import java.sql.ResultSet;
 
+public interface RowMapper <T>{
+	 T add( ResultSet resultSet);
 }

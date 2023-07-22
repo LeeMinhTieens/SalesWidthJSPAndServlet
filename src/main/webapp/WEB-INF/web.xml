@@ -4,24 +4,49 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
 	id="WebApp_ID" version="4.0">
 	<display-name>Sales</display-name>
+	<listener>
+		<listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
+	</listener>
+	<!-- Thông số cấu hình file bean -->
+	<context-param>
+		<!-- tự động quét các package và tìm kiếm các bean để đăng ký với Weld 
+			container -->
+		<param-name>org.jboss.weld.development.autoScan</param-name>
+		<param-value>true</param-value>
+	</context-param>
 
-	<!-- SITEMESH BEFIN-->
+	<!-- SITEMESH BEFIN -->
 	<filter>
-	    <filter-name>sitemesh</filter-name>
-	    <filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
 	</filter>
-	
+
 	<filter-mapping>
-	    <filter-name>sitemesh</filter-name>
-	    <url-pattern>/*</url-pattern>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-	<!-- SITEMESH END-->
-	
+	<!-- SITEMESH END -->
+
+
+<!-- Filter BEFIN -->
+	<filter>
+		<filter-name>filter</filter-name>
+		<filter-class>com.leminhtien.fillter.AuthorizationFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Filter END -->
+
+
 	<session-config>
 		<tracking-mode>COOKIE</tracking-mode>
 	</session-config>
-	
+
 
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

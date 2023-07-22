@@ -69,10 +69,19 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="header__right">
-                        <div class="header__right__auth">
-                            <a href="#">Login</a>
-                            <a href="#">Register</a>
-                        </div>
+                      <c:if test="${empty USERMODEL}">
+			        	   <div class="header__right__auth">
+	                            <a href="<c:url value='/dang-nhap?action=login'/>">Login</a>
+	                            <a href="<c:url value='/dang-ky?action=register'/>">Register</a>
+                      	   </div>
+        
+				        </c:if>
+				        <c:if test="${not empty USERMODEL}">
+				        	<div class="header__right__auth">
+	                            <a href="#">${USERMODEL.fullname}</a>
+	                            <a href="<c:url value='/thoat?action=logout'/>">Thoát</a>
+                      	    </div>
+				        </c:if>
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
                             <li><a href="#"><span class="icon_heart_alt"></span>

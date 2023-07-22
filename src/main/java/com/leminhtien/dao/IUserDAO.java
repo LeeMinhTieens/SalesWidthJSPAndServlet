@@ -7,4 +7,5 @@ public interface IUserDAO extends GenericDAO<UserModel>{
 		void update(UserModel userModel);
 		void delete(UserModel userModel);
 		UserModel fineByUserNameAndPassWord(String userName, String password);
+		UserModel fineOne(Integer id);
 }

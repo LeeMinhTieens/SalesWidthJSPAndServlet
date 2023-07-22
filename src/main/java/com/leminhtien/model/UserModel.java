@@ -5,15 +5,15 @@ import java.sql.Timestamp;
 public class UserModel extends AbstractModel<UserModel>{
 	private String name;
 	private String password;
-	private String fullName;
-	private String phoneNumber;
+	private String fullname;
+	private String phonenumber;
 	private String address;
 	private String email;
-	private Integer roleId;
-	private Timestamp createDate;
-	private String modifyDate;
-	private String modifyBy;
-	
+	private Integer roleid;
+	private Timestamp createdate;
+	private String modifydate;
+	private String modifyby;
+	private String code;
 	public String getName() {
 		return name;
 	}
@@ -26,17 +26,17 @@ public class UserModel extends AbstractModel<UserModel>{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getFullName() {
-		return fullName;
+	public String getFullname() {
+		return fullname;
 	}
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
 	}
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public String getPhonenumber() {
+		return phonenumber;
 	}
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
 	}
 	public String getAddress() {
 		return address;
@@ -50,28 +50,37 @@ public class UserModel extends AbstractModel<UserModel>{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Integer getRoleId() {
-		return roleId;
+	public Integer getRoleid() {
+		return roleid;
 	}
-	public void setRoleId(Integer roleId) {
-		this.roleId = roleId;
+	public void setRoleid(Integer roleid) {
+		this.roleid = roleid;
 	}
-	public Timestamp getCreateDate() {
-		return createDate;
+	public Timestamp getCreatedate() {
+		return createdate;
 	}
-	public void setCreateDate(Timestamp createDate) {
-		this.createDate = createDate;
+	public void setCreatedate(Timestamp createdate) {
+		this.createdate = createdate;
 	}
-	public String getModifyDate() {
-		return modifyDate;
+	public String getModifydate() {
+		return modifydate;
 	}
-	public void setModifyDate(String modifyDate) {
-		this.modifyDate = modifyDate;
+	public void setModifydate(String modifydate) {
+		this.modifydate = modifydate;
 	}
-	public String getModifyBy() {
-		return modifyBy;
+	public String getModifyby() {
+		return modifyby;
 	}
-	public void setModifyBy(String modifyBy) {
-		this.modifyBy = modifyBy;
+	public void setModifyby(String modifyby) {
+		this.modifyby = modifyby;
 	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	
+	
+	
 }
