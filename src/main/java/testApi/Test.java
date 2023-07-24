@@ -81,7 +81,7 @@ public class Test extends HttpServlet{
 			}else {
 				System.out.println("this khac null");
 			}
-			Integer id = productService.update(product);
+			Integer id = productService.delete(product);
 			JSONObject jsonResponse = new JSONObject();
 			jsonResponse.put("id",id);
 			PrintWriter out = response.getWriter();

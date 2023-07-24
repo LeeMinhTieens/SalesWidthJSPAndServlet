@@ -3,6 +3,7 @@
 
  	<excludes>
         <pattern>/api*</pattern>
+        <pattern>/cart*</pattern>
     </excludes>
 
 	<decorator name="admin" page="admin.jsp">

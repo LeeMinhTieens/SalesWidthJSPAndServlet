@@ -11,6 +11,7 @@ public interface IProductDAO extends GenericDAO<ProductModel>{
 	Integer save(ProductModel productModel);
 	Integer update(ProductModel productMode);
 	Integer delete(ProductModel productModel);
+	Integer delete(Integer id);
 	
 	
 

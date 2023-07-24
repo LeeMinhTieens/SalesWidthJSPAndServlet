@@ -45,5 +45,23 @@ public class ProductService implements IProductService{
 	public Integer delete(ProductModel productModel) {
 		return productDAO.delete(productModel);
 	}
-
+	
+	public Integer delete(Integer id) {
+		return productDAO.delete(id);
+	}
+	
+	public Integer delete(Integer[]ids) {
+		Integer result = 0;
+		try {
+			for(Integer id : ids) {
+				result += productDAO.delete(id);
+			}
+			return result;
+			
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	
 }

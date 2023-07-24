@@ -16,7 +16,6 @@
 <c:url value='/template/admin/images/favicon.png'/>
   <!-- endinject -->
   <!-- Plugin css for this page -->
-  <link rel="stylesheet" href="<c:url value='/template/admin/vendors/datatables.net-bs4/dataTables.bootstrap4.css'/>">
   <link rel="stylesheet" href="<c:url value='/template/admin/js/select.dataTables.min.css'/>">
   <!-- End plugin css for this page -->
   <!-- inject:css -->

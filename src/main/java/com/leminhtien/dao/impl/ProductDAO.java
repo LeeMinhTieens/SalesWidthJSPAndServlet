@@ -37,7 +37,7 @@ public class ProductDAO extends AbstractDAO<ProductModel> implements IProductDAO
 	@Override
 	public Integer update(ProductModel productMode) {
 		String sql = "UPDATE product SET name=? ,prize= ?,shortdescription= ?,quantity= ?,content= ?,sellnumber= ?,modifydate= ?,modifyby= ? WHERE id = ?";
-		return updateOrDelete(sql,new ProductMapper(),productMode.getName(),productMode.getPrize(),productMode.getShortDescription(),productMode.getQuantity(),
+		return updateOrDelete(sql,productMode.getName(),productMode.getPrize(),productMode.getShortDescription(),productMode.getQuantity(),
 				productMode.getContent(),productMode.getSellNumber(),productMode.getModifyDate(),productMode.getModifyBy(),productMode.getId());
 	}
 
@@ -47,22 +47,11 @@ public class ProductDAO extends AbstractDAO<ProductModel> implements IProductDAO
 		return updateOrDelete(sql, productModel.getId());
 	}
 	
+	@Override
 	public Integer delete(Integer id) {
 		String sql = "DELETE FROM product WHERE id = ?";
 		return updateOrDelete(sql, id);
 	}
 	
-	public Integer delete(Integer[]ids) {
-		Integer result = 0;
-		try {
-			for(Integer id : ids) {
-				result += delete(id);
-			}
-			return result;
-			
-		} catch (Exception e) {
-			return null;
-		}
-	}
 
 }
