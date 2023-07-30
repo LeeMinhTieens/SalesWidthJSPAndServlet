@@ -188,5 +188,72 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 		}
 
 	}
+	
+	public Integer count(String sql) {
+		PreparedStatement pre = null;
+		Connection con = null;
+		Integer result = null;
+		ResultSet resultSet = null;
+		try {
+			con = MyConnection.getConnection();
+			pre = con.prepareStatement(sql);
+			resultSet = pre.executeQuery();
+			if(resultSet.next()) {
+				result = resultSet.getInt(1);
+			}
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				if (con != null) {
+					con.close();
+				}
+				if (pre != null) {
+					pre.close();
+				}
+				if(resultSet!=null) {
+					resultSet.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+	
+	public ArrayList<Integer> fineIds(String sql,String name,Object...parameters) {
+		PreparedStatement pre = null;
+		Connection con = null;
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		ResultSet resultSet = null;
+		try {
+			con = MyConnection.getConnection();
+			pre = con.prepareStatement(sql);
+			setParameter(pre, parameters);
+			resultSet = pre.executeQuery();
+			while(resultSet.next()) {
+				result.add(resultSet.getInt(name));
+			}
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				if (con != null) {
+					con.close();
+				}
+				if (pre != null) {
+					pre.close();
+				}
+				if(resultSet!=null) {
+					resultSet.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
 
 }

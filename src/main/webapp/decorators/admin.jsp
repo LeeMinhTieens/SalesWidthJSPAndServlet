@@ -13,7 +13,12 @@
   <link rel="stylesheet" href="<c:url value='/template/admin/vendors/typicons/typicons.css'/>">
   <link rel="stylesheet" href="<c:url value='/template/admin/vendors/simple-line-icons/css/simple-line-icons.css'/>">
   <link rel="stylesheet" href="<c:url value='/template/admin/vendors/css/vendor.bundle.base.css'/>">
-<c:url value='/template/admin/images/favicon.png'/>
+  <link href="<c:url value='/template/web/bootstrap/css/bootstrap.min.css'/>" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <script src="<c:url value='/template/web/bootstrap/js/bootstrap.min.js'/>"></script>
+  	<script src="<c:url value='/template/famework/jquery.js'/>"></script>
+  		<script src="<c:url value='/template/ckeditor/ckeditor.js'/>"></script>
+  
   <!-- endinject -->
   <!-- Plugin css for this page -->
   <link rel="stylesheet" href="<c:url value='/template/admin/js/select.dataTables.min.css'/>">
@@ -23,6 +28,7 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="<c:url value='/template/admin/images/favicon.png'/>" />
   <script src="<c:url value='/template/famework/jquery.js'/>"></script>
+  
 </head>
 <body>
  <div class="container-scroller"> 
@@ -56,6 +62,8 @@
   <!-- Custom js for this page-->
   <script src="<c:url value='/template/admin/js/dashboard.js'/>"></script>
   <script src="<c:url value='/template/admin/js/Chart.roundedBarCharts.js'/>"></script>
+  	<script src="<c:url value='/template/paging/jquery.twbsPagination.js'/>"></script>
+  	<script src="<c:url value='/template/paging/jquery.twbsPagination.min.js'/>"></script>
   <!-- End custom js for this page-->
 </body>
 </html>

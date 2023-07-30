@@ -13,6 +13,9 @@ public class ProductModel extends AbstractModel<ProductModel>{
 	private String modifyBy;
 	private String content;
 	private Integer sellNumber;
+	private Integer typeId;
+	private String img;
+	private Integer[] productSize;
 	
 	public String getName() {
 		return name;
@@ -74,6 +77,53 @@ public class ProductModel extends AbstractModel<ProductModel>{
 	public void setSellNumber(Integer sellNumber) {
 		this.sellNumber = sellNumber;
 	}
+	public Integer getTypeId() {
+		return typeId;
+	}
+	public void setTypeId(Integer typeId) {
+		this.typeId = typeId;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+	public Integer[] getProductSize() {
+		return productSize;
+	}
+	public void setProductSize(Integer[] productSize) {
+		this.productSize = productSize;
+	}
 	
+	private String getx(Integer[] productSize) {
+		if(productSize != null) {
+			String text = "\nmang là: ";
+			for(Integer x:productSize ) {
+				text+=x.toString()+"\n";
+			}
+			return text;
+		}else {
+			return "mang null";
+		}
+	}
 	
+	@Override
+	public String toString() {
+		return 	this.getId()+"\n"+
+				this.getName()+"\n"+
+				this.getContent()+"\n"+
+				this.getCreateBy()+"\n"+
+				this.getImg()+"\n"+
+				this.getModifyBy()+"\n"+
+				this.getShortDescription()+"\n"+
+				this.getPrize()+"\n"+
+				this.getSellNumber()+"\n"+
+				this.getQuantity()+"\n"+
+				this.getCreateDate()+"\n"+
+				this.getTypeId()+"\n"+
+				getx(this.getProductSize());
+				
+				
+	}
 }

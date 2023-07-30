@@ -1,7 +1,9 @@
 package testApi;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 
 import javax.inject.Inject;
@@ -12,20 +14,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.leminhtien.dao.ITypeDAO;
 import com.leminhtien.model.ProductModel;
+import com.leminhtien.model.TypeModel;
 import com.leminhtien.model.UserModel;
 import com.leminhtien.service.IProductService;
+import com.leminhtien.service.ITypeService;
 import com.leminhtien.service.IUserService;
 import com.leminhtien.utils.HttpUtil;
-@WebServlet(urlPatterns = {"/api/test/product"})
+@WebServlet(urlPatterns = {"/api/test/type"})
 public class Test extends HttpServlet{
 	ResourceBundle myAlert = ResourceBundle.getBundle("myAlert");
 	ResourceBundle registerAlert = ResourceBundle.getBundle("register");
 
 	private static final long serialVersionUID = 1L;
+	
+	@Inject
+	ITypeService typeService;
 	
 	@Inject
 	IProductService productService;
@@ -75,19 +84,51 @@ public class Test extends HttpServlet{
 //					PrintWriter out = response.getWriter();
 //					out.print(jsonResponse.toString());
 //				}
-			ProductModel product = HttpUtil.readReson(request.getReader()).toModel(ProductModel.class);
-			if(product == null) {
-				System.out.println("this is null");
-			}else {
-				System.out.println("this khac null");
-			}
-			Integer id = productService.delete(product);
-			JSONObject jsonResponse = new JSONObject();
-			jsonResponse.put("id",id);
-			PrintWriter out = response.getWriter();
-			out.print(jsonResponse.toString());
+//			ProductModel product = HttpUtil.readReson(request.getReader()).toModel(ProductModel.class);
+//			if(product == null) {
+//				System.out.println("this is null");
+//			}else {
+//				System.out.println("this khac null");
+//			}
+//			Integer id = productService.save(product);
+//			JSONObject jsonResponse = new JSONObject();
+//			jsonResponse.put("id",id);
+//			PrintWriter out = response.getWriter();
+//			out.print(jsonResponse.toString());
+//			InputStream inputStream = request.getInputStream();
+//			String jsonString = new String(inputStream.readAllBytes(),StandardCharsets.UTF_8);
+//			JSONObject json = new JSONObject(jsonString);
+//			int id = json.getInt("id");
+//			TypeModel type = HttpUtil.readReson(request.getReader()).toModel(TypeModel.class);
+//			Integer id = typeService.update(type);
+//			int count = typeService.delete(id);
+//			JSONObject jsonRespone = new JSONObject();
+//			jsonRespone.put("count",count);
+//			PrintWriter out = response.getWriter();
+//			out.print(jsonRespone.toString());
 		
-			}
+//		InputStream inputStream  = request.getInputStream();
+//		String jsonString = new String(inputStream.readAllBytes(),StandardCharsets.UTF_8);
+//		JSONObject json = new JSONObject(jsonString);
+//		int id = json.getInt("id");			
+//		ObjectMapper object = new ObjectMapper();
+//		Integer[] idpr = typeService.fineIds(id);
+//		String ids = object.writeValueAsString(idpr);
+//		JSONArray listId = new JSONArray(ids);
+//		JSONObject jsonRespone = new JSONObject();
+//		jsonRespone.put("ids",listId);
+//		PrintWriter out = response.getWriter();
+//		out.print(jsonRespone.toString());
+			
+		InputStream inputStream  = request.getInputStream();
+		String jsonString = new String(inputStream.readAllBytes(),StandardCharsets.UTF_8);
+		JSONObject json = new JSONObject(jsonString);
+		int id = json.getInt("id");			
+		ObjectMapper object = new ObjectMapper();
+		ProductModel product = productService.fineById(id);
+		object.writeValue(response.getOutputStream(), product);
+		
+}
 
 	
 }
