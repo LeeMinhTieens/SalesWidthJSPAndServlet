@@ -7,4 +7,5 @@ public interface IUserService {
 	void update(UserModel userModel);
 	void delete(UserModel userModel);
 	UserModel fineByUserNameAndPassWord(String userName, String password);
+	UserModel fineBySocialId(String social_id);
 }

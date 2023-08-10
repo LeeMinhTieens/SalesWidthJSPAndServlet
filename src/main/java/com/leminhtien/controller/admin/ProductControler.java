@@ -1,6 +1,7 @@
 package com.leminhtien.controller.admin;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.leminhtien.model.ProductModel;
@@ -52,8 +54,13 @@ public class ProductControler extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
 		String type = request.getParameter("type");
 		if (type.equals("list")) {
+			String name = request.getParameter("name");
+			List<ProductModel> productModel = null;
 			Paging pagable = null;
 			String sortName = request.getParameter("sortName");
 			String sortBy = request.getParameter("sortBy");
@@ -67,12 +74,21 @@ public class ProductControler extends HttpServlet {
 			if(page!= null) {
 				pagable.setPage(Integer.parseInt(page));
 			}
-			pagable.setTotalItem(productService.countItem());
+			
 			String limit = request.getParameter("limit");
 			if(limit!= null && !limit.equals("")) {
 				pagable.setLimit(Integer.parseInt(limit));
 			}
-			List<ProductModel> productModel = productService.fineAll(pagable);
+			if(name!= null&& !name.equals("")) {
+				productModel = productService.fineByName(name);
+				pagable.setTotalItem(productModel.size());
+				request.setAttribute("name",name);
+				System.out.println("chạy vào true");
+			}else {
+				productModel = productService.fineAll(pagable);				
+				pagable.setTotalItem(productService.countItem());
+				System.out.println("chạy vào false");
+			}
 			request.setAttribute("Page",pagable);
 			request.setAttribute("PRODUCT", productModel);
 			RequestDispatcher rd = request.getRequestDispatcher("/views/admin/list/product.jsp");
@@ -95,6 +111,19 @@ public class ProductControler extends HttpServlet {
 			request.setAttribute("TYPE", listType);
 			RequestDispatcher rd = request.getRequestDispatcher("/views/admin/list/newproduct.jsp");
 			rd.forward(request, response);
+		}else if(type.equals("search")) {
+//			String requestData = new String(request.getInputStream().readAllBytes(),StandardCharsets.UTF_8);
+//			JSONObject jsonrequest = new JSONObject(requestData);
+//			String name = jsonrequest.getString("name");
+			String name = request.getParameter("name");
+			List<ProductModel> list = productService.fineByName(name);
+			JSONArray jsonArray = new JSONArray();
+			for(ProductModel product : list) {
+				jsonArray.put(product.getName());
+			}
+			response.getWriter().print(jsonArray.toString());
+			response.getWriter().flush();
+			
 		}
 
 	}
@@ -159,6 +188,41 @@ public class ProductControler extends HttpServlet {
 		jsonrespone.put("message", message);
 		jsonrespone.put("alert", alert);
 		response.getWriter().print(jsonrespone.toString());
+		
+	}
+	
+	@Override
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		
+		String message ="";
+		String alert = "";
+		String jsonString = new String (request.getInputStream().readAllBytes(),StandardCharsets.UTF_8);
+		JSONArray jsonArray = new JSONArray(jsonString);
+		if(jsonArray.isEmpty()) {
+			message="Không có phần tử nào được xóa";
+			alert = myAlert.getString("danger");
+		}else {
+			Integer ids[] = new Integer[jsonArray.length()];
+			for(int i=0;i<jsonArray.length();i++) {
+				ids[i] = jsonArray.getInt(i);
+			}
+			Integer count = productService.delete(ids);
+			if(count == null || count == 0) {
+				message=productAlert.getString("deleteError");
+				alert = myAlert.getString("danger");
+			}else {
+				message = productAlert.getString("deleteSuccess")+ count + "sản phẩm";
+				alert = myAlert.getString("success");
+			}
+		}
+		
+		JSONObject jsonResponse = new JSONObject();
+		jsonResponse.put("message",message);
+		jsonResponse.put("alert", alert);
+		response.getWriter().print(jsonResponse.toString());		
 		
 	}
 	

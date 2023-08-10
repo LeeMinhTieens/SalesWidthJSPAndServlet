@@ -53,7 +53,7 @@ public class ProductService implements IProductService{
 		return list;
 	}
 
-	@Override
+	
 	public ProductModel fineById(Integer id) {		
 		ProductModel product =  productDAO.fineById(id);
 		try {
@@ -110,15 +110,13 @@ public class ProductService implements IProductService{
 		return productDAO.delete(productModel);
 	}
 	
-	public Integer delete(Integer id) {
-		return productDAO.delete(id);
-	}
+
 	
 	public Integer delete(Integer[]ids) {
 		Integer result = 0;
 		try {
 			for(Integer id : ids) {
-				result += productDAO.delete(id);
+				result += this.delete(id);
 			}
 			return result;
 			
@@ -132,5 +130,16 @@ public class ProductService implements IProductService{
 		return productDAO.countItem();
 	}
 	
+	
+	
+	private Integer delete(Integer id) {
+		try {
+			productSize.deleteByProductId(id);
+			return productDAO.delete(id);
+		} catch (Exception e) {
+			return null;
+		}
+		
+	}
 	
 }

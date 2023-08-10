@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 			con = MyConnection.getConnection();
 			pre = con.prepareStatement(sql);
 			setParameter(pre, parameters);
-			resultSet = pre.executeQuery(sql);
+			resultSet = pre.executeQuery();
 			while (resultSet.next()) {
 				result.add(mapper.add(resultSet));
 			}
@@ -62,6 +63,9 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 					pre.setString(index, (String) item);
 				} else if (item instanceof Timestamp) {
 					pre.setTimestamp(index, (Timestamp) item);
+				}else if(item == null) {
+					System.out.println("it was run in set NULL");
+					pre.setNull(index, Types.NULL);
 				}
 			}
 		} catch (Exception e) {

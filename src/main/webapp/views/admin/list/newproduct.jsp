@@ -3,7 +3,7 @@
 <%@include file="/common/taglib.jsp" %>
 <!DOCTYPE html>
 <c:url var="urladd" value="/admin/product"/>
-<c:url var="urllist" value='/admin/product?type=list'/>
+<c:url var="urllist" value='/admin/product?sortName=name&sortBy=ASC&page=1&limit=10&type=list'/>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -13,7 +13,7 @@
 
 <div class="container ">
 			
-		<a href="<c:url value='/admin/product?type=list'/>" class="mt-5 mb-5"><i class="bi bi-arrow-left"></i> Quay lại</a>
+		<a href="${urllist}" class="mt-5 mb-5"><i class="bi bi-arrow-left"></i> Quay lại</a>
 		<div class="row mt-3">    
 			<div class="col-md-12">
 			 

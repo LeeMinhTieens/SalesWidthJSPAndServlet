@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@include file="/common/taglib.jsp" %>
- 
  <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
         <div class="me-3">
@@ -68,9 +67,12 @@
             </div>
           </li>
           <li class="nav-item">
-            <form class="search-form" action="#">
+            <form class="search-form" action="" id="form-search" style="position: relative;" method="GET">
               <i class="icon-search"></i>
-              <input type="search" class="form-control" placeholder="Search Here" title="Search here">
+              <input type="search" class="form-control" placeholder="Search Here" title="Search here" id="search-product">
+             <div style="position: absolute;width: 250px; background-color: #e9e6e6 ;display:none; max-height: 200px;overflow: hidden;" class="mt-2 ms-3 Regular shadow text-dark " id="content-search">
+             	
+             </div>
             </form>
           </li>
           <li class="nav-item dropdown">

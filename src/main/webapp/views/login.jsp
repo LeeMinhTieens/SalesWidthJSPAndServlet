@@ -46,6 +46,19 @@
                     <input type="password" id="form2Example27" class="form-control form-control-lg" name="password" placeholder="Password"/>
                     <label class="form-label" for="form2Example27"></label>
                   </div>
+                  
+                  <div class="form-outline mb-4 bg-danger text-center p-3 rounded">
+                    <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:8080/Sales/login-google&response_type=code
+   						 &client_id=129913137786-ptsig5boh2erm7i23l6jl1pp68jb8i5v.apps.googleusercontent.com&approval_prompt=force" 
+    						class="text-decoration-none text-white d-block">Login with Google</a>
+                  </div>
+                  
+                   <div class="form-outline mb-4 bg-primary text-center p-3 rounded">
+                    <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:8080/Sales/login-google&response_type=code
+   						 &client_id=129913137786-ptsig5boh2erm7i23l6jl1pp68jb8i5v.apps.googleusercontent.com&approval_prompt=force" 
+    						class="text-decoration-none text-white d-block"> Login with FaceBook</a>
+                  </div>
+                 
 
                   <div class="pt-1 mb-4">
                     <button class="btn btn-dark btn-lg btn-block" type="button" id="buttonLogin">Login</button>

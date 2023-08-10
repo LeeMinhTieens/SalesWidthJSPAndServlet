@@ -22,8 +22,9 @@ public class UserMapper implements RowMapper<UserModel>{
 			user.setAddress(resultSet.getString("address"));
 			user.setCreatedate(resultSet.getTimestamp("createdate"));
 			user.setModifyby(resultSet.getString("modifyby"));
+			user.setSocial_id(resultSet.getString("social_id"));
 		} catch (SQLException e) {
-			// TODO: handle exception
+			return null;
 		}
 		
 		return user;

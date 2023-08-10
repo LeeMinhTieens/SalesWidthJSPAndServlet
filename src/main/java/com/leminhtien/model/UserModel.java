@@ -14,6 +14,8 @@ public class UserModel extends AbstractModel<UserModel>{
 	private String modifydate;
 	private String modifyby;
 	private String code;
+	private String social_id;
+	
 	public String getName() {
 		return name;
 	}
@@ -80,7 +82,20 @@ public class UserModel extends AbstractModel<UserModel>{
 	public void setCode(String code) {
 		this.code = code;
 	}
+	public String getSocial_id() {
+		return social_id;
+	}
+	public void setSocial_id(String social_id) {
+		this.social_id = social_id;
+	}
+	@Override
+	public String toString() {
+		return "UserModel [name=" + name + ", password=" + password + ", fullname=" + fullname + ", phonenumber="
+				+ phonenumber + ", address=" + address + ", email=" + email + ", roleid=" + roleid + ", createdate="
+				+ createdate + ", modifydate=" + modifydate + ", modifyby=" + modifyby + ", code=" + code
+				+ ", social_id=" + social_id + "]";
+	}
 	
-	
+
 	
 }

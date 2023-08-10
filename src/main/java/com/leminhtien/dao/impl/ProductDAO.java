@@ -20,7 +20,7 @@ public class ProductDAO extends AbstractDAO<ProductModel> implements IProductDAO
 				sql.append(" ");
 				sql.append(pagable.getSort().getSortBy());
 			}
-			sql.append(" LIMIT "+ pagable.getPage() +","+pagable.getLimit());
+			sql.append(" LIMIT "+ pagable.getOfset() +","+pagable.getLimit());
 			
 		}
 		return query(sql.toString(),new ProductMapper());

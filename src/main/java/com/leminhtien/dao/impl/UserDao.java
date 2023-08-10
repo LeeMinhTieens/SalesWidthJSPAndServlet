@@ -4,7 +4,6 @@ import javax.inject.Inject;
 
 import com.leminhtien.dao.IUserDAO;
 import com.leminhtien.mapper.UserMapper;
-import com.leminhtien.model.RoleModel;
 import com.leminhtien.model.UserModel;
 import com.leminhtien.service.IRoleService;
 
@@ -15,38 +14,39 @@ public class UserDao extends AbstractDAO<UserModel> implements IUserDAO{
 	@Override
 	public Integer save(UserModel userModel) {
 		StringBuilder sql = new StringBuilder("INSERT INTO user (name, password," );
-		sql.append("fullname,phonenumber,address,email,role_id,createdate)");
-		sql.append(" VALUES (?,?,?,?,?,?,?,?)");
-		return insert(sql.toString(),userModel.getName(),userModel.getPassword(),userModel.getFullname(),userModel.getPhonenumber(),userModel.getAddress(),userModel.getEmail(),userModel.getRoleid(),userModel.getCreatedate());
+		sql.append("fullname,phonenumber,address,email,role_id,createdate,social_id)");
+		sql.append(" VALUES (?,?,?,?,?,?,?,?,?)");
+		return insert(sql.toString(),userModel.getName(),userModel.getPassword(),userModel.getFullname(),userModel.getPhonenumber(),userModel.getAddress(),userModel.getEmail(),userModel.getRoleid(),userModel.getCreatedate(),userModel.getSocial_id());
 	}
 
 	@Override
-	public void update(UserModel userModel) {
+	public Integer update(UserModel userModel) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
-	public void delete(UserModel userModel) {
-		// TODO Auto-generated method stub
-		
+	public Integer delete(UserModel userModel) {
+		String sql = "DELETE FROM user WHERE id=?";
+		return updateOrDelete(sql, userModel.getId());
 	}
 
 	@Override
 	public UserModel fineByUserNameAndPassWord(String userName, String password) {
 		String sql = "SELECT * FROM user WHERE name = ? AND password = ?";
-		UserModel user =  fineOne(sql, new UserMapper(), userName, password);
-		if(user != null) {
-			RoleModel role = roleService.fineById(user.getRoleid());
-			user.setCode(role.getCode());
-		}
-		return user;
+		 return  fineOne(sql, new UserMapper(), userName, password);
 	}
 
 	@Override
 	public UserModel fineOne(Integer id) {
-		String sql = "SELECT * FROM user WHERE id = ?;";
+		String sql = "SELECT * FROM user WHERE id = ?";
 		return fineOne(sql,new UserMapper(), id);
+	}
+
+	@Override
+	public UserModel fineBySocailId(String socialId) {
+		String sql = "SELECT * FROM user WHERE social_id = ?";
+		return fineOne(sql, new UserMapper(),socialId);
 	}
 
 	
